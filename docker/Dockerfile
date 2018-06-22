@@ -26,3 +26,28 @@ RUN make
 
 # [Optional] Build custom ops
 RUN make ops
+
+# changes by garyfeng:
+RUN apt update && apt install wget
+
+# Fetch DensePose data.
+RUN cd /densepose/DensePoseData
+RUN bash get_densepose_uv.sh
+
+# For training, download the DensePose-COCO dataset:
+# RUN bash get_densepose_COCO.sh
+
+# For evaluation, get the necessary files:
+RUN bash get_eval_data.sh
+
+# Setting-up the COCO dataset.
+# download it from http://cocodataset.org/#download
+#    Note that the total size of COCO is ~100G
+#    follow the instructions therein to actually download
+# Create a symlink for the COCO dataset in your datasets/data folder.
+#    RUN ln -s /path/to/coco /densepose/detectron/datasets/data/coco
+
+# Create symlinks for the DensePose-COCO annotations
+# RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
+#RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
+#RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
