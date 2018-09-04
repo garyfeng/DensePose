@@ -31,19 +31,36 @@ RUN make ops
 RUN apt update && apt install wget
 
 # Fetch DensePose data.
-RUN cd /densepose/DensePoseData
 RUN bash /densepose/DensePoseData/get_densepose_uv.sh
+RUN mv UV_data /densepose/DensePoseData/
 
 # For training, download the DensePose-COCO dataset:
 RUN bash /densepose/DensePoseData/get_DensePose_COCO.sh
+mv DensePose_COCO /densepose/DensePoseData/
 
 # For evaluation, get the necessary files:
 RUN bash /densepose/DensePoseData/get_eval_data.sh
+mv eval_data /densepose/DensePoseData/
 
 # Setting-up the COCO dataset.
 # download it from http://cocodataset.org/#download
 #    Note that the total size of COCO is ~100G
 #    follow the instructions therein to actually download
+#   wget http://images.cocodataset.org/zips/train2014.zip
+#   wget http://images.cocodataset.org/zips/val2014.zip
+#   wget http://images.cocodataset.org/annotations/annotations_trainval2014.zip
+# and set up in the host directory something like the following directory:
+# coco
+# |_ coco_train2014
+# |  |_ <im-1-name>.jpg
+# |  |_ ...
+# |  |_ <im-N-name>.jpg
+# |_ coco_val2014
+# |_ ...
+# |_ annotations
+#   |_ instances_train2014.json
+#   |_ ...
+
 # Create a symlink for the COCO dataset in your datasets/data folder.
 #    RUN ln -s /path/to/coco /densepose/detectron/datasets/data/coco
 
