@@ -36,11 +36,11 @@ RUN mv UV_data /densepose/DensePoseData/
 
 # For training, download the DensePose-COCO dataset:
 RUN bash /densepose/DensePoseData/get_DensePose_COCO.sh
-mv DensePose_COCO /densepose/DensePoseData/
+RUN mv DensePose_COCO /densepose/DensePoseData/
 
 # For evaluation, get the necessary files:
 RUN bash /densepose/DensePoseData/get_eval_data.sh
-mv eval_data /densepose/DensePoseData/
+RUN mv eval_data /densepose/DensePoseData/
 
 # Setting-up the COCO dataset.
 # download it from http://cocodataset.org/#download
