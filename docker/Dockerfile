@@ -32,13 +32,13 @@ RUN apt update && apt install wget
 
 # Fetch DensePose data.
 RUN cd /densepose/DensePoseData
-RUN bash get_densepose_uv.sh
+RUN bash /densepose/DensePoseData/get_densepose_uv.sh
 
 # For training, download the DensePose-COCO dataset:
-# RUN bash get_densepose_COCO.sh
+RUN bash /densepose/DensePoseData/get_DensePose_COCO.sh
 
 # For evaluation, get the necessary files:
-RUN bash get_eval_data.sh
+RUN bash /densepose/DensePoseData/get_eval_data.sh
 
 # Setting-up the COCO dataset.
 # download it from http://cocodataset.org/#download
@@ -49,5 +49,5 @@ RUN bash get_eval_data.sh
 
 # Create symlinks for the DensePose-COCO annotations
 # RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
-#RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
-#RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_minival.json /densepose/detectron/datasets/data/coco/annotations/
+# RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_train.json /densepose/detectron/datasets/data/coco/annotations/
+# RUN ln -s /densepose/DensePoseData/DensePose_COCO/densepose_coco_2014_valminusminival.json /densepose/detectron/datasets/data/coco/annotations/
